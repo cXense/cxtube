@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Green - Deep Orange palette -->
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#FF5722</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
+    <!-- custom colors -->
+    <color name="duration_text">@color/primary_light</color>
+    <color name="duration_background">#42000000</color>
+    <color name="ad_view_border">#90000000</color>
+    <color name="video_background">#000000</color>
+</resources>

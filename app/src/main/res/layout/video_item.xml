@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/video_item_width">
+
+        <ImageView
+            android:id="@+id/video_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/video_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/video_duration_margin"
+            android:background="@drawable/duration_background"
+            android:drawableStart="@drawable/ic_play_arrow_wrapped"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/duration_text"
+            tools:text="120:00:00" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/video_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/video_name_margin"
+        android:lines="3"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="@color/primary_text"
+        tools:text="Video: some very very very very very very very very long title" />
+
+    <TextView
+        android:id="@+id/video_published"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/video_published_margin"
+        android:gravity="end"
+        android:textColor="@color/secondary_text"
+        tools:text="325 years ago" />
+
+</LinearLayout>

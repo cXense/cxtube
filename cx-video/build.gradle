@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.getkeepsafe.dexcount'
+
+ext {
+    authority = 'CxVideoInitProvider'
+}
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SDK_ENDPOINT", '"https://api.widget.cx/v2/"'
+        buildConfigField "String", "SDK_NAME", '"cxense-video"'
+        buildConfigField "String", "AUTHORITY", "APPLICATION_ID + \".$authority\" "
+
+        manifestPlaceholders = [authority: "$authority"]
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility compileSourceVersion
+        targetCompatibility compileTargetVersion
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+    lintOptions {
+        // Don't abort if Lint finds an error, otherwise the Jenkins build
+        // will be marked as failed, and Jenkins won't analyse the Lint output
+        abortOnError false
+    }
+}
+
+dependencies {
+    api "com.cxpublic.cx-android-sdk:cx-core:$cxenseVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:2.3.0"
+}
+
+apply from: "$rootDir/gradle/code-quality.gradle"

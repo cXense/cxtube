@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CxTube</string>
+    <string name="error_loading_videos_failed">Error at loading videos list.</string>
+    <string name="error_loading_video">Error at loading video.</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_share">Share</string>
+    <string name="share_video_text">Have you seen this video?\n%1$s at %2$s</string>
+    <string name="title_activity_video">Video</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://tv.cxvid.io\",\n  }\n}]</string>
+    <string name="tags">Tags:</string>
+    <string name="recommended">Recommended</string>
+    <string name="title_activity_tagged_videos">TaggedVideosActivity</string>
+</resources>

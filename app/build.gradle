@@ -1,0 +1,114 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.getkeepsafe.dexcount'
+
+// We use keystore.properties file for signing data.
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
+
+// We use api.properties file for api keys
+def apiProperties = new Properties()
+apiProperties.load(new FileInputStream(rootProject.file("api.properties")))
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
+    defaultConfig {
+        applicationId "com.cxense.cxtube"
+        minSdkVersion 19
+        targetSdkVersion 27
+        vectorDrawables.useSupportLibrary = true
+        versionCode 6
+        versionName "1.3.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        def hostUrl = "http://" + apiProperties['HOST_DOMAIN_URL'] + apiProperties['HOST_PATH_URL']
+        buildConfigField 'String', 'SITE_ID', apiProperties['SITE_ID']
+        buildConfigField 'String', 'WIDGET_ID', apiProperties['WIDGET_ID']
+        buildConfigField 'String', 'VIDEO_API_KEY', apiProperties['VIDEO_API_KEY']
+        buildConfigField 'String', 'HOST_URL', "\"${hostUrl}\""
+
+        manifestPlaceholders = [
+                hostDomain: apiProperties['HOST_DOMAIN_URL'],
+                hostPath  : apiProperties['HOST_PATH_URL'],
+                hostUrl   : hostUrl,
+        ]
+
+        resValue "string", "ad_space_id", apiProperties['ADSPACE_ID']
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../keystore/debug.keystore')
+        }
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            debuggable true
+            signingConfig signingConfigs.release
+            useProguard true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        // Don't abort if Lint finds an error, otherwise the Jenkins build
+        // will be marked as failed, and Jenkins won't analyse the Lint output
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation "com.cxpublic:cxense-android:$cxenseUnifiedVersion"
+    implementation "com.cxpublic.cx-android-sdk:cx-ad:$cxenseVersion"
+    implementation project(':cx-video')
+
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    implementation "android.arch.lifecycle:extensions:$architectureVersion"
+    implementation "android.arch.lifecycle:common-java8:$architectureVersion"
+
+    implementation "android.arch.persistence.room:runtime:$architectureVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$architectureVersion"
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.7.1'
+
+    implementation 'com.google.android:flexbox:0.2.7'
+
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
+}
+
+apply from: "$rootDir/gradle/code-quality.gradle"

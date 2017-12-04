@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.cxense.cxtube",
+    "sha256_cert_fingerprints":
+    ["F3:92:81:25:00:E3:08:38:C2:F3:17:8A:65:52:E8:FB:4D:2E:15:A2:8B:9C:E5:81:B6:FE:30:03:0D:9A:EB:15"]
+  }
+}]

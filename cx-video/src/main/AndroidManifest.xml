@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cxense.cxvideo">
+
+    <application>
+        <provider
+            android:name=".CxVideoInitProvider"
+            android:authorities="${applicationId}.${authority}"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+</manifest>
