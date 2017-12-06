@@ -7,5 +7,14 @@ android:
     - android-27
     - extra
 
+before_script:
+  - cp api.properties.example api.properties
+  - cp keystore.properties.example keystore.properties
+
 script:
-  ./gradlew clean build
+  ./gradlew clean check assembleDebug
+
+notifications:
+  slack:
+    rooms:
+      secure: sIeyrZbNaFLXyg0Fed5a7sE2h8crPeIZqQDhMekVHMJcvlmIUdHb2Dn+Gb3p7iSpfmiG9cGzWAsqcTzlpapPE4cLxXwxWEyMhegaiwqbGKWMdLFWHNO0G5Se9p0ywm3bRDt+Zve54eTylVqnZyRl0wm4NzWhhX9qZsWM2aVOzIdVfs3b5GdWk4H7OqtrkECTzUDQyAttO35CmT0K7o9ns/0w422p8ILkM4Lfz3QCbC+CY1/FUZc0cFOZrbUCOUz3T0s6nPrSiPGP8T+eFkzGq0UueSEp6XMJqoP177ErIjBTE+vesR7y+gTCg+Q0HOETHbTuEVuv2metyyjqD0QGGNXGVsajl7LIGkCQUJM00QJO1UNAGk7/4IVOvsZ59gMikMnOG0CzIZ8BB9UQ+elaFQ99kiuPO0ahQ28zSHdw5YqSLmTO1VkEncax57eNsxyS90QFZT9v8+caIfbYFkBArY6AIQJScrjdiAnKiKxbMQGWnERoqBzgT/srzPLYBXcUcfKYW8olYkHCpr0o16K5LvUdgiaAImKSx7WMBRPTXl72SI1xs1j8QMCD4/jgD+u15k1rgkkU/DpnFrE1cE7J9aH8fSf302t1pLtDdZvUKmDHKN+xxUq2zp9kcvxATjY17BAqjyp1eEbeeM3DcNEyU5k01/xtWwX+8O6qbkljKiY=
